@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circles</title>
+	<script type="text/javascript" src="scripts/paper-full.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/circles.css">
+	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script type="text/paperscript" canvas="myCanvas">
+		var circles = [];
+		function onKeyDown(event) {
+			var maxPoint = new Point(view.size.width, view.size.height);	//view.size.height/width is a method from paperscritp that gives us the current screen (or canvas element) dimensions
+			var randomPoint = Point.random();	//this gives us a random point between 0 and 1 non-inclusive
+			var point = maxPoint * randomPoint;
+			var newCircle = new Path.Circle(new Point(point), 500);
+			newCircle.fillColor = 'yellow'
+			circles.push(newCircle);
+		}
+		function onFrame(event){
+			for(var i = 0; i < circles.length; i++){
+				circles[i].fillColor.hue +=1;
+				circles[i].scale(.9);
+			}
+		}
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
